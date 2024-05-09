@@ -1,5 +1,6 @@
 ﻿using BookSrote.API.Models;
 using BookSrote.API.Repository;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookSrote.API.Controllers
@@ -53,5 +54,14 @@ namespace BookSrote.API.Controllers
             return Ok();
         }
 
+
+        //Patch book by id
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateBookPatch([FromRoute] int id, [FromBody] JsonPatchDocument bookModel)
+        {
+            await _bookRepository.UpdateBookByIdAsync(id, bookModel);
+
+            return Ok();
+        }
     }
 }

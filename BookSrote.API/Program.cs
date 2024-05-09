@@ -19,7 +19,7 @@ namespace BookStore.API
             // Add services to the container.
             //builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=.;Database=BookStoreAPINew;Integrated Security=True;TrustServerCertificate=True"));
             builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(connectionString));
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

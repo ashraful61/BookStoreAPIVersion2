@@ -1,6 +1,7 @@
 ﻿using BookSrote.API.Data;
 using BookSrote.API.Models;
 using BookStore.API.Data;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookSrote.API.Repository
@@ -56,13 +57,18 @@ namespace BookSrote.API.Repository
             var record = await _context.Books.FindAsync(bookId);
             if (record != null)
             {
-
+                record.Id = bookId;
                 record.Title = bookModel.Title;
                 record.Description = bookModel.Description;
                 await _context.SaveChangesAsync();
             }
 
+            //return record;
+        }
 
+        public async Task UpdateBookPatch(int bookId, JsonPatchDocument bookModel)
+        {
+       
 
             //return record;
         }
