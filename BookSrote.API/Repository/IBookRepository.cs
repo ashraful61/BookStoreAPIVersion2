@@ -10,6 +10,7 @@ namespace BookSrote.API.Repository
         Task<BookModel> GetBookByIdAsync(int bookId);
         Task<int> AddBookAsync(BookModel bookModel);
         Task UpdateBookByIdAsync(int bookId, BookModel bookModel);
-        Task<IActionResult> UpdateBookPatch([FromRoute] int id, [FromBody] JsonPatchDocument bookModel);
+        Task UpdateBookPatchAsync(int bookId, JsonPatchDocument bookModel);
+        Task DeleteBookByIdAsync(int bookId);
     }
 }

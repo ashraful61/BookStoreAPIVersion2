@@ -46,22 +46,30 @@ namespace BookSrote.API.Controllers
         }
 
         //Update book by id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int:min(1)}")]
         public async Task<IActionResult> UpdateBook([FromRoute] int id, [FromBody]BookModel bookModel)
         {
             await _bookRepository.UpdateBookByIdAsync(id, bookModel);
-    
             return Ok();
         }
 
 
         //Patch book by id
-        [HttpPatch("{id}")]
+        [HttpPatch("{id:int:min(1)}")]
         public async Task<IActionResult> UpdateBookPatch([FromRoute] int id, [FromBody] JsonPatchDocument bookModel)
         {
-            await _bookRepository.UpdateBookByIdAsync(id, bookModel);
-
+            await _bookRepository.UpdateBookPatchAsync(id, bookModel);
             return Ok();
         }
+
+
+        //Update book by id
+        [HttpDelete("{id:int:min(1)}")]
+        public async Task<IActionResult> DelecteBook([FromRoute] int id, [FromBody] BookModel bookModel)
+        {
+            await _bookRepository.DeleteBookByIdAsync(id);
+            return Ok();
+        }
+
     }
 }
