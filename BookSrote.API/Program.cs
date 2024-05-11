@@ -24,6 +24,16 @@ namespace BookStore.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IBookRepository, BookRepository>();
+            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 
@@ -36,8 +46,9 @@ namespace BookStore.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
